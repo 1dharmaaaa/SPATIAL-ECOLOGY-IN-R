@@ -1,3 +1,4 @@
+# Here I can write anything I want!!! 42 is the meaning of life univcerse and all!
 
 # R as a calculator
 2 + 3
@@ -34,4 +35,3 @@ plot(people, microplastics, pch=19)
 
 plot(people, microplastics, pch=19, cex=2)
 plot(people, microplastics, pch=19, cex=2, col="blue")
-
