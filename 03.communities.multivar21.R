@@ -1,3 +1,7 @@
+#is performing Detrended Correspondence Analysis (DCA) on the 'dune' dataset, which is part of the 'vegan' package in R. DCA is a multivariate statistical method commonly used in ecology to analyze and visualize species composition data.
+
+
+
 # Load the 'vegan' package for ecological analysis
 library(vegan)
 
@@ -43,6 +47,7 @@ pldc2
 pldc1 + pldc2
 
 # Comment: The sum of the percentage contributions of the first two axes is printed.
+#The results suggest that the first axis (ldc1) contributes approximately 38.56% to the total variation, and the second axis (ldc2) contributes approximately 32.48%. Together, these two axes contribute around 71.04% of the total variation in the data.
 
 # Plot the DCA result
 plot(ord)
