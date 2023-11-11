@@ -1,6 +1,8 @@
 # Code related to population ecology
 
-# Install and load the 'spatstat' package for point pattern analysis
+Install and Load spatstat:
+
+#Installs the 'spatstat' package for point pattern analysis and loads it into the R environment.
 install.packages("spatstat")
 library(spatstat)
 
@@ -53,10 +55,12 @@ plot(densitymap, col=clnew)
 plot(bei.extra)
 
 # Access the 'elev' component from 'bei.extra'
+#Accesses and plots the 'elev' component from 'bei.extra'.
 elev <- bei.extra[[1]]
 plot(elev)
 
 # Create multiframe plots
+#Creates multiframe plots to compare and visualize different aspects of the data.
 par(mfrow=c(1,2))
 plot(densitymap)
 plot(elev)
@@ -69,5 +73,3 @@ par(mfrow=c(1,3))
 plot(bei)
 plot(densitymap)
 plot(elev)
-
-
