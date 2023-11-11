@@ -56,6 +56,3 @@ plot(ndvi2006, col=clvir)
 # speediing up calculation
 ndvi2006a <- im.ndvi(m2006, 1, 2)
 plot(ndvi2006a, col=cl)
-
-
-
