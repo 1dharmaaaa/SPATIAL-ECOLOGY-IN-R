@@ -1,3 +1,5 @@
+#spectralindices.temp chapter
+
 # Comment: This code focuses on visualizing and calculating the Difference Vegetation Index (DVI) and Normalized Difference Vegetation Index (NDVI) for two different time points (1992 and 2006) using remote sensing data.
 
 # Load necessary libraries
@@ -38,6 +40,7 @@ par(mfrow=c(1,2))
 im.plotRGB.user(m1992, 1, 2, 3)
 im.plotRGB.user(m2006, 1, 2, 3)
 
+
 # Comment: RGB plots are created for the 2006 image with different band combinations and side-by-side comparison.
 
 # Calculating the DVI
@@ -58,8 +61,16 @@ dvi1992i <- im.dvi(m1992, 1, 2)
 dvi2006i <- im.dvi(m2006, 1, 2)
 
 # Comment: DVI is calculated using the 'im.dvi' function from the 'imageRy' package.
-
+#DVI is a simpler vegetation index that looks at the difference between the reflectance in the NIR and red bands. It does not normalize the values as NDVI does.
 # NDVI calculation
+#Sensitivity to Vegetation Cover:
+
+#NDVI: It is sensitive to the density and health of vegetation. The normalized nature of NDVI makes it suitable for comparing vegetation conditions across different landscapes.
+#DVI: It is sensitive to changes in vegetation cover but does not provide the same normalization as NDVI. The absolute values of DVI may vary depending on factors like soil type and background reflectance.
+Applications:
+  
+  #NDVI: Widely used in applications such as monitoring vegetation health, assessing land cover changes, and estimating biomass. NDVI is a standard index in many remote sensing applications.
+#DVI: Although less commonly used than NDVI, DVI can be applied in situations where the normalization provided by NDVI is not critical, and a simpler index is sufficient.
 ndvi1992 = (m1992[[1]] - m1992[[2]]) / (m1992[[1]] + m1992[[2]])
 ndvi2006 = (m2006[[1]] - m2006[[2]]) / (m2006[[1]] + m2006[[2]])
 
@@ -72,6 +83,7 @@ dev.off()
 par(mfrow=c(1,2))
 plot(ndvi1992, col=cl)
 plot(ndvi2006, col=cl)
+#less darkbrow, less reflectance of nir
 
 # Comment: A multiframe plot is created to compare the NDVI for 1992 and 2006 side by side.
 
@@ -80,6 +92,7 @@ clvir <- colorRampPalette(c("violet", "dark blue", "blue", "green", "yellow"))(1
 
 # Plot NDVI for 2006 with a new color palette
 plot(ndvi2006, col=clvir)
+#blue represents lack of vegetation
+#redgreen, green brown, red brown and red orange green are bad combos for dictonic people
 
 # Comment: A plot of the NDVI for 2006 is created using a new color palette for better visualization.
-
