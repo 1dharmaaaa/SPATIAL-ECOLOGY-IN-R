@@ -1,5 +1,3 @@
-# Here I can write anything I want!!! 42 is the meaning of life univcerse and all!
-
 # R as a calculator
 2 + 3
 
@@ -17,23 +15,31 @@ final^2
 
 # array
 sophi <- c(10, 20, 30, 50, 70) # microplastics 
-# fcuntions have parentheses and inside them there are arguments
 
+# Create vectors for plotting
 paula <- c(100, 500, 600, 1000, 2000) # people
 
+# Scatter plot without labels
 plot(paula, sophi)
 
+# Scatter plot with axis labels
 plot(paula, sophi, xlab="number of people", ylab="microplastics")
 
-
+# Copy vectors for plotting
 people <- paula
 microplastics <- sophi
 
+# Scatter plot using copied vectors
 plot(people, microplastics)
-plot(people, microplastics, pch=19)
-# https://www.google.com/search?client=ubuntu-sn&hs=yV6&sca_esv=570352775&channel=fs&sxsrf=AM9HkKknoSOcu32qjoErsqX4O1ILBOJX4w:1696347741672&q=point+symbols+in+R&tbm=isch&source=lnms&sa=X&ved=2ahUKEwia9brkm9qBAxVrQvEDHbEYDuMQ0pQJegQIChAB&biw=1760&bih=887&dpr=1.09#imgrc=lUw3nrgRKV8ynM
 
+# Scatter plot with a different plotting symbol
+plot(people, microplastics, pch=19)
+
+# Scatter plot with a larger plotting symbol
 plot(people, microplastics, pch=19, cex=2)
+
+# Scatter plot with a larger blue plotting symbol
 plot(people, microplastics, pch=19, cex=2, col="blue")
+
 
 
