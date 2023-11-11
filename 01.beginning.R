@@ -35,3 +35,5 @@ plot(people, microplastics, pch=19)
 
 plot(people, microplastics, pch=19, cex=2)
 plot(people, microplastics, pch=19, cex=2, col="blue")
+
+

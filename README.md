@@ -1,12 +1,12 @@
-# SPATIAL-ECOLOGY-IN-R 👾
+# Spatial Ecology in R 👾
 
-##professor
+## Professor 👨‍🔬
+Duccio Rocchini, president of the master program for few days more!!!
 
-
-
-##main scripts in this repo 💻
+## Main scripts in this repo 💻
 + scripts on populations
-+ +scripts on communities
-+ +scripts on ecosystems
-  > **Note**
-  > Scripts will be added lecture by lecture
++ scripts on communities
++ scripts on ecosystems
+
+> **Note**
+> Scripts will be added lecture by lecture
