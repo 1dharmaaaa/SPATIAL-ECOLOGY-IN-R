@@ -1,5 +1,4 @@
-# Why populations disperse over the landscape in a certain manner?
-
+#3rd lecture on population distribution
 # Load necessary libraries
 library(sdm)
 library(terra)
@@ -52,6 +51,7 @@ elev <- system.file("external/elevation.asc", package="sdm")
 elevmap <- rast(elev) # from terra package
 plot(elevmap)
 points(pres, cex=.5)
+#rana is more in low elevation than in high elevation
 
 # Comment: The elevation predictor is loaded and plotted, and presence points are overlaid on the elevation map.
 
@@ -60,7 +60,7 @@ temp <- system.file("external/temperature.asc", package="sdm")
 tempmap <- rast(temp) # from terra package
 plot(tempmap)
 points(pres, cex=.5)
-
+#rana more in high temperature than low temperature
 # Comment: The temperature predictor is loaded and plotted, and presence points are overlaid on the temperature map.
 
 # Exercise: Load and plot vegetation cover predictor
@@ -68,6 +68,7 @@ vege <- system.file("external/vegetation.asc", package="sdm")
 vegemap <- rast(vege) # from terra package
 plot(vegemap)
 points(pres, cex=.5)
+#rana more in high vegetation than in low vegetation
 
 # Comment: The vegetation cover predictor is loaded and plotted, and presence points are overlaid on the vegetation cover map.
 
@@ -76,6 +77,7 @@ prec <- system.file("external/precipitation.asc", package="sdm")
 precmap <- rast(prec) # from terra package
 plot(precmap)
 points(pres, cex=.5)
+#from the graphs rana more in low precipitation than high precipitation
 
 # Comment: The precipitation predictor is loaded and plotted, and presence points are overlaid on the precipitation map.
 
@@ -86,19 +88,21 @@ par(mfrow=c(2,2))
 # Elevation
 plot(elevmap)
 points(pres, cex=.5)
+#lives in lower elevation
 
 # Temperature
 plot(tempmap)
 points(pres, cex=.5)
+#lives in higher temperature 
 
 # Vegetation cover
 plot(vegemap)
 points(pres, cex=.5)
+#lives where vegetation is high
 
 # Precipitation
 plot(precmap)
 points(pres, cex=.5)
-
+#where relatively low precipitation
 # Comment: A multiframe layout is created to visualize the environmental predictors, and presence points are overlaid for each predictor.
-
 
