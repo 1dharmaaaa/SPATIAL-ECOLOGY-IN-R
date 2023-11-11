@@ -1,80 +1,79 @@
 # Why populations disperse over the landscape in a certain manner?
 
+# Load necessary libraries
 library(sdm)
 library(terra)
 
+# Load species occurrence data
 file <- system.file("external/species.shp", package="sdm")
-
 rana <- vect(file)
 rana$Occurrence
 
+# Plot the species occurrences
 plot(rana)
 
-# Selecting presences
+# Selecting presence points
 pres <- rana[rana$Occurrence==1,]
 plot(pres)
 
-# exercise: select absence and call them abse
+# Exercise: Select absence points and call them 'abse'
 abse <- rana[rana$Occurrence==0,]
 plot(abse)
 
-# exrecise: plot presences and absences, one beside the other
+# Exercise: Plot presences and absences side by side
 par(mfrow=c(1,2))
 plot(pres)
 plot(abse)
 
-# your new friend in case of graphical nulling:
+# Close graphical device
 dev.off()
 
-# exercise: plot pres and abse altogether with two different colours
+# Exercise: Plot presences and absences with different colors
 plot(pres, col="dark blue")
 points(abse, col="light blue")
 
-# predictors: environmental variables
-# file <- system.file("external/species.shp", package="sdm")
-# rana <- vect(file)
-
-# elevation predictor
+# Predictors: Environmental variables
+# Load elevation predictor
 elev <- system.file("external/elevation.asc", package="sdm") 
 elevmap <- rast(elev) # from terra package
 plot(elevmap)
 points(pres, cex=.5)
 
-# temperature predictor
+# Load temperature predictor
 temp <- system.file("external/temperature.asc", package="sdm") 
 tempmap <- rast(temp) # from terra package
 plot(tempmap)
 points(pres, cex=.5)
 
-# exrcise: do the same with vegetation cover
+# Exercise: Load and plot vegetation cover predictor
 vege <- system.file("external/vegetation.asc", package="sdm") 
 vegemap <- rast(vege) # from terra package
 plot(vegemap)
 points(pres, cex=.5)
 
-# exrcise: do the same with vegetation cover
+# Exercise: Load and plot precipitation predictor
 prec <- system.file("external/precipitation.asc", package="sdm") 
 precmap <- rast(prec) # from terra package
 plot(precmap)
 points(pres, cex=.5)
 
-# final multiframe
+# Final multiframe
 
 par(mfrow=c(2,2))
 
-# elev
+# Elevation
 plot(elevmap)
 points(pres, cex=.5)
 
-# temp
+# Temperature
 plot(tempmap)
 points(pres, cex=.5)
 
-# vege
+# Vegetation cover
 plot(vegemap)
 points(pres, cex=.5)
 
-# prec
+# Precipitation
 plot(precmap)
 points(pres, cex=.5)
 
