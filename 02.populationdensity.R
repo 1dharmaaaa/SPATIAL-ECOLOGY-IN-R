@@ -31,6 +31,12 @@ bei.extra
 
 # Plot the 'bei.extra' dataset
 plot(bei.extra)
+#Lower elevations: Points or areas with darker purple color may correspond to lower elevations in the tropical rainforest.
+Yellow Color:
+  
+ #Gradient (or Slope): Definition: Gradient, or slope, is a measure of the steepness of the terrain at a specific location. It represents the rate of change of elevation with respect to horizontal distance.
+   #Higher elevations: Points or areas with lighter yellow color may correspond to higher elevations in the tropical rainforest.
+#extra here refers to elevation and gradient
 
 # Comment: A plot of the 'bei.extra' dataset is generated to explore the spatial distribution of points in this additional dataset.
 
@@ -38,6 +44,8 @@ plot(bei.extra)
 plot(bei.extra$elev)
 elevation <- bei.extra$elev
 plot(elevation)
+
+#plot(bei.extra$elev): This function creates a plot of the variable 'elev' from the 'bei.extra' dataset. The variable 'elev' likely represents elevation data. The plot() function is a generic function in R used to create various types of plots. In this case, it plots the values of the 'elev' variable.
 
 # Comment: A subset of the 'bei.extra' dataset, specifically the 'elev' component, is plotted and stored in the 'elevation' variable.
 
@@ -68,6 +76,7 @@ plot(densitymap, col=cl)
 # Comment: Another color palette with fewer colors is created, and the density map is plotted with this reduced color scheme.
 
 # Create a new color palette
+#In R and RStudio, color ramp palettes are used to assign colors to different values in a dataset, especially in the context of visualizations such as plots, maps, or other graphical representations. Color ramp palettes help convey information in a visually meaningful way and are particularly useful for representing continuous or sequential data.
 clnew <- colorRampPalette(c("dark blue", "blue", "light blue"))(100)
 plot(densitymap, col=clnew)
 
