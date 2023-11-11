@@ -9,28 +9,42 @@ file <- system.file("external/species.shp", package="sdm")
 rana <- vect(file)
 rana$Occurrence
 
+# Comment: The species occurrence data is loaded from a shapefile, and the 'Occurrence' column is examined.
+
 # Plot the species occurrences
 plot(rana)
+
+# Comment: A plot of species occurrences is generated to visualize their spatial distribution.
 
 # Selecting presence points
 pres <- rana[rana$Occurrence==1,]
 plot(pres)
 
+# Comment: Presence points are selected, and a plot is generated to visualize the spatial distribution of these presence points.
+
 # Exercise: Select absence points and call them 'abse'
 abse <- rana[rana$Occurrence==0,]
 plot(abse)
+
+# Comment: Absence points are selected, and a plot is generated to visualize the spatial distribution of these absence points.
 
 # Exercise: Plot presences and absences side by side
 par(mfrow=c(1,2))
 plot(pres)
 plot(abse)
 
+# Comment: Two plots are generated side by side to compare the spatial distribution of presence and absence points.
+
 # Close graphical device
 dev.off()
+
+# Comment: The graphical device is closed to reset the plotting layout.
 
 # Exercise: Plot presences and absences with different colors
 plot(pres, col="dark blue")
 points(abse, col="light blue")
+
+# Comment: Presence and absence points are plotted with different colors for better visual distinction.
 
 # Predictors: Environmental variables
 # Load elevation predictor
@@ -39,11 +53,15 @@ elevmap <- rast(elev) # from terra package
 plot(elevmap)
 points(pres, cex=.5)
 
+# Comment: The elevation predictor is loaded and plotted, and presence points are overlaid on the elevation map.
+
 # Load temperature predictor
 temp <- system.file("external/temperature.asc", package="sdm") 
 tempmap <- rast(temp) # from terra package
 plot(tempmap)
 points(pres, cex=.5)
+
+# Comment: The temperature predictor is loaded and plotted, and presence points are overlaid on the temperature map.
 
 # Exercise: Load and plot vegetation cover predictor
 vege <- system.file("external/vegetation.asc", package="sdm") 
@@ -51,11 +69,15 @@ vegemap <- rast(vege) # from terra package
 plot(vegemap)
 points(pres, cex=.5)
 
+# Comment: The vegetation cover predictor is loaded and plotted, and presence points are overlaid on the vegetation cover map.
+
 # Exercise: Load and plot precipitation predictor
 prec <- system.file("external/precipitation.asc", package="sdm") 
 precmap <- rast(prec) # from terra package
 plot(precmap)
 points(pres, cex=.5)
+
+# Comment: The precipitation predictor is loaded and plotted, and presence points are overlaid on the precipitation map.
 
 # Final multiframe
 
@@ -76,5 +98,7 @@ points(pres, cex=.5)
 # Precipitation
 plot(precmap)
 points(pres, cex=.5)
+
+# Comment: A multiframe layout is created to visualize the environmental predictors, and presence points are overlaid for each predictor.
 
 
