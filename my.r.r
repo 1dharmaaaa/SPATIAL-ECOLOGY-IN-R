@@ -1,15 +1,11 @@
-#import data
-setwd("/Users/vaishnavipittala/Desktop")
-Stress <- read.csv("stressmanagement.csv", header =T, sep = ",")
-View(Stress)
+setwd("/Users/vaishnavipittala/Desktop/stats")
+studentdata <- read.table("outstationstudentsstress.csv", header=T, sep=",")
+class(studentdata)
+str(studentdata)
 
-class(Stress) 
-"data.frame"
-str(Stress)
-#We are not interested into the first and last column
-
-Stress.df
-names(Stress.df) <- c("Agreed_to_participate",
+stud.df <- studentdata[,-c(1,ncol(studentdata))]
+stud.df
+names(stud.df) <- c("Agreed_to_participate",
                       "Name",
                       "Age",
                       "Gender",
@@ -21,37 +17,83 @@ names(Stress.df) <- c("Agreed_to_participate",
                       "Resilience_Score",
                       "Stress_Management_Score",
                       "Perceived_Stress_Scale")
-str(Stress)
-# Clean the data for 'country'
-stress.df$country[stress.df$country == "ITALY"] <- "Italy"
-stress.df$country[stress.df$country == "italy"] <- "Italy"
-stress.df$country[stress.df$country == "Italy"] <- "Italy"
-stress.df$country[stress.df$country == "SPAIN"] <- "Spain"
+str(stud.df)
+#cleaning the data
+stud.df[,1:5]
+stud.df$Agreed_to_participate [stud.df$Agreed_to_participate == "Y"] <- "Yes"
+stud.df$Agreed_to_participate [stud.df$Agreed_to_participate == "N"] <- "No"
+stud.df$Agreed_to_participate
 
-# Transform 'country' into a factor in the dataframe
-stress.df$country <- as.factor(stress.df$country)
+stud.df$Gender [stud.df$Gender == "F"] <- "Female"
+stud.df$Gender [stud.df$Gender == "M"] <- "Male"
+stud.df$Gender
 
-# Clean 'km_travel' column
-idx <- which(is.na(as.numeric(stress.df$km_travel)))
-stress.df$km_travel[stress.df$km_travel == "600 metri"] <- 0.6
-stress.df$travel[idx[2]] <- 2
-stress.df$travel[idx[3]] <- 2.5
-stress.df$travel[idx[4]] <- 1
-stress.df$travel[idx[5]] <- 35
-stress.df$travel[idx[6]] <- 2
-stress.df$travel[idx[7]] <- 2
-stress.df$travel[idx[8]] <- 1.8
-stress.df$travel[idx[9]] <- 2
-stress.df$travel <- as.numeric(stress.df$km_travel)
+stud.df$Pursuing_Undergrad_or_Postgrad [stud.df$Pursuing_Undergrad_or_Postgrad == "ug"] <- "Under graduation"
+stud.df$Pursuing_Undergrad_or_Postgrad [stud.df$Pursuing_Undergrad_or_Postgrad == "pg"] <- "Post graduation"
+stud.df$Pursuing_Undergrad_or_Postgrad [stud.df$Pursuing_Undergrad_or_Postgrad == "bsc"] <- "Under graduation"
+stud.df$Pursuing_Undergrad_or_Postgrad
 
-# Convert 'stats_know' into a factor
-stress.df$stats_know <- factor(stress.df$stats_know, levels = c(1, 2, 3, 4, 5))
+as.factor(stud.df$Pursuing_Undergrad_or_Postgrad)
 
-# Convert 'hours_stud' to numeric
-stress.df$hours_stud <- as.numeric(stress.df$hours_stud)
+stud.df[,6:12]
 
-# Update 'use_R' column using ifelse
-stress.df$use_R <- ifelse(stress.df$use_R == "Yes", TRUE, FALSE)
+stud.df$Travel_Time_to_University_Minutes [stud.df$Travel_Time_to_University_Minutes  == "2ND"] <- "2"
+stud.df$Travel_Time_to_University_Minutes [stud.df$Travel_Time_to_University_Minutes  == "2nd"] <- "2"
+stud.df$Pursuing_Undergrad_or_Postgrad [stud.df$Pursuing_Undergrad_or_Postgrad == "pg"] <- "Post graduation"
+stud.df$Pursuing_Undergrad_or_Postgrad [stud.df$Pursuing_Undergrad_or_Postgrad == "bsc"] <- "Under graduation"
+stud.df$Pursuing_Undergrad_or_Postgrad
+#checking non numeric
+as.numeric(stud.df$Year_of_Study)
+is.na(as.numeric(stud.df$Year_of_Study))
+stud.df$Year_of_Study  [stud.df$Year_of_Study  == "2ND"] <- "2"
+stud.df$Year_of_Study  [stud.df$Year_of_Study  == "2nd"] <- "2"
+stud.df$Year_of_Study
 
-# Writing to CSV
-write.table(x = stress.df, file = "stress_data_clean.csv")
+as.numeric(stud.df$Travel_Time_to_University_Minutes)
+is.na(as.numeric(stud.df$Travel_Time_to_University_Minutes))
+idx <- which(is.na(as.numeric(stud.df$Travel_Time_to_University_Minutes)))
+stud.df$Travel_Time_to_University_Minutes[idx]
+cbind(idx, stud.df$Travel_Time_to_University_Minutes[idx])
+
+stud.df$Travel_Time_to_University_Minutes[3] <- 60
+stud.df$Travel_Time_to_University_Minutes[19] <- 0
+
+as.numeric(stud.df$Hometown_to_University_Hours)
+is.na(as.numeric(stud.df$Hometown_to_University_Hours))
+idx <- which(is.na(as.numeric(stud.df$Hometown_to_University_Hours)))
+stud.df$Hometown_to_University_Hours[idx]
+cbind(idx, stud.df$Hometown_to_University_Hours[idx])
+
+
+stud.df$Hometown_to_University_Hours[1] <- 9
+stud.df$Hometown_to_University_Hours[2] <- 3
+stud.df$Hometown_to_University_Hours[4] <- 4
+stud.df$Hometown_to_University_Hours[5] <- 5
+
+stud.df[,6:12]
+
+stud.df$Outstation_Student <- ifelse(stud.df$Outstation_Student== "Yes", TRUE, FALSE)
+stud.df$Outstation_Student 
+
+
+ifelse((stud.df$Outstation_Student =="Yes" | stud.df$Outstation_Student =="No"), "Local", "Non Local")
+stud.df$Outstation_Student
+cbind(stud.df$Outstation_Student, stud.df$local)
+#lets put it close to the country
+stud.df
+
+#To eliminate those who are not outstation students
+stud.df<- stud.df[stud.df$Outstation_Student != "FALSE", ]
+stud.df
+
+write.csv(stud.df, "outstationstudentsstress.csv", row.names=TRUE)
+summary(stud.df)
+
+Q1: How many students in between age 18- 25?
+  table(stud.df$Age)
+round(prop.table(table(stud.df$Age)),25)*100
+
+Q2: How many students coming from travelling more than an hour everyday?
+  table(stud.df$Travel_Time_to_University_Minutes)
+  
+
