@@ -1,3 +1,38 @@
+library(terra)
+library(imageRy)
+library(viridis)
+
+im.list()
+#lets make a list of all the files which are available.
+
+im.import("sentinel.png")
+
+sent <- im.import("sentinel.png")
+#there is forth band which is useless
+#band1 =Nir, #band 2= red, #band 3= green
+
+
+im.plotRGB(sent, r=1, g=2, b=3)
+im.plotRGB(sent, r=2, g=1, b=3)
+
+#A high percentage of near infrared light is reflected off the leaves in healthy plants. When a plant is unhealthy, it has less chlorophyll and therefore reflects less near infrared light. Unhealthy plants also reflect more red light.
+#there is vegetation 
+
+nir <- sent[[1]]
+plot(nir)
+
+#nir is first element of sent 
+#pixels of original image we are going to pass a window from 1 to another. in that window we are going to calculate the standard deviation of 1- 9 pixels
+#we are going to report the standard deviation of the moving window
+#it is calculate sd of those pixel.
+#at the end we pass moving window 
+#so if you change the dimension of moving window
+
+#function we are going to use is called focal. The code is
+
+# calculation
+focal(nir, )
+#nir is the band with function called matrix
 #we are going to describe it from 1 to 9 and how these pixels are distributed 
 #if we have 25 pixels 
 #the discription of dimension we are using in the brackets
@@ -28,3 +63,4 @@ plot(stacknv, col=viridis)
 sd7 <- focal(nir, matrix(1/49, 7, 7), fun=sd)
 stacknv <- c(nir, sd3, sd5, sd7)
 plot(stacknv, col=viridis)
+
