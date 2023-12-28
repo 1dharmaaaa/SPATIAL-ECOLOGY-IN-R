@@ -8,42 +8,42 @@ file <- system.file("external/species.shp", package="sdm")
 rana <- vect(file)
 rana$Occurrence
 
-# Comment: The species occurrence data is loaded from a shapefile, and the 'Occurrence' column is examined.
+# The species occurrence data is loaded from a shapefile, and the 'Occurrence' column is examined.
 
 # Plot the species occurrences
 plot(rana)
 
-# Comment: A plot of species occurrences is generated to visualize their spatial distribution.
+#  A plot of species occurrences is generated to visualize their spatial distribution.
 
 # Selecting presence points
 pres <- rana[rana$Occurrence==1,]
 plot(pres)
 
-# Comment: Presence points are selected, and a plot is generated to visualize the spatial distribution of these presence points.
+# Presence points are selected, and a plot is generated to visualize the spatial distribution of these presence points.
 
 # Exercise: Select absence points and call them 'abse'
 abse <- rana[rana$Occurrence==0,]
 plot(abse)
 
-# Comment: Absence points are selected, and a plot is generated to visualize the spatial distribution of these absence points.
+# Absence points are selected, and a plot is generated to visualize the spatial distribution of these absence points.
 
 # Exercise: Plot presences and absences side by side
 par(mfrow=c(1,2))
 plot(pres)
 plot(abse)
 
-# Comment: Two plots are generated side by side to compare the spatial distribution of presence and absence points.
+#  Two plots are generated side by side to compare the spatial distribution of presence and absence points.
 
 # Close graphical device
 dev.off()
 
-# Comment: The graphical device is closed to reset the plotting layout.
+# the graphical device is closed to reset the plotting layout.
 
 # Exercise: Plot presences and absences with different colors
 plot(pres, col="dark blue")
 points(abse, col="light blue")
 
-# Comment: Presence and absence points are plotted with different colors for better visual distinction.
+# Presence and absence points are plotted with different colors for better visual distinction.
 
 # Predictors: Environmental variables
 # Load elevation predictor
@@ -53,7 +53,7 @@ plot(elevmap)
 points(pres, cex=.5)
 #rana is more in low elevation than in high elevation
 
-# Comment: The elevation predictor is loaded and plotted, and presence points are overlaid on the elevation map.
+# The elevation predictor is loaded and plotted, and presence points are overlaid on the elevation map.
 
 # Load temperature predictor
 temp <- system.file("external/temperature.asc", package="sdm") 
@@ -61,7 +61,7 @@ tempmap <- rast(temp) # from terra package
 plot(tempmap)
 points(pres, cex=.5)
 #rana more in high temperature than low temperature
-# Comment: The temperature predictor is loaded and plotted, and presence points are overlaid on the temperature map.
+# The temperature predictor is loaded and plotted, and presence points are overlaid on the temperature map.
 
 # Exercise: Load and plot vegetation cover predictor
 vege <- system.file("external/vegetation.asc", package="sdm") 
@@ -70,7 +70,7 @@ plot(vegemap)
 points(pres, cex=.5)
 #rana more in high vegetation than in low vegetation
 
-# Comment: The vegetation cover predictor is loaded and plotted, and presence points are overlaid on the vegetation cover map.
+# The vegetation cover predictor is loaded and plotted, and presence points are overlaid on the vegetation cover map.
 
 # Exercise: Load and plot precipitation predictor
 prec <- system.file("external/precipitation.asc", package="sdm") 
@@ -79,7 +79,7 @@ plot(precmap)
 points(pres, cex=.5)
 #from the graphs rana more in low precipitation than high precipitation
 
-# Comment: The precipitation predictor is loaded and plotted, and presence points are overlaid on the precipitation map.
+# The precipitation predictor is loaded and plotted, and presence points are overlaid on the precipitation map.
 
 # Final multiframe
 
@@ -104,5 +104,5 @@ points(pres, cex=.5)
 plot(precmap)
 points(pres, cex=.5)
 #where relatively low precipitation
-# Comment: A multiframe layout is created to visualize the environmental predictors, and presence points are overlaid for each predictor.
+#  A multiframe layout is created to visualize the environmental predictors, and presence points are overlaid for each predictor.
 
