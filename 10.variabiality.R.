@@ -31,35 +31,31 @@ plot(sd3, col=viridisc)
 
 #instead of 3/3 calculate variability in 7/7 moving window
 
+sd7 <- focal(nir, matrix(1/9, 7, 7), fun=sd)
+plot(sd7)
 
-
-sd4 <- focal(nir, matrix(1/9, 7, 7), fun=sd)
-plot(sd4)
-
-viridisc <- colorRampPalette(viridis(8))(255)
-plot(sd4, col=viridisc)
 #7/7 is more higher than 3/3 so more clearer pixels.
 
 #exercise 2:plot via par(mfrow()) the 3x3 and the standard deviation
 
 par(mfrow=c(1,2))
 plot(sd3, col=viridisc)
-plot(sd4, col=viridisc)
+plot(sd7, col=viridisc)
 
 #if you calculate sd 3/3 moving window you will have a very local , subtle difference . if you enlarge the window youll enlarge it to 7/7 which is 49 instead of 9 that is why we have this effect we have higher variability
 #since we are increasing additionally pixel we are increasing the variability
-par(mfrow=c(1,2))
+
 #original image plus the 7 x 7 sd
+# original image plus the 7x7 sd #near infrared in greenchannel.
+
 im.plotRGB(sent, r=2, g=1, b=3)
-#near infrared in green channel
-plot(sd4, col=viridisc)
+plot(sd7, col=viridisc)
 
 #there is a big contrast between cloud and rocks. there is more variability
 #those parts have the highest variabaility
 #this might indicate high geological variability or species variability
 #here there is rock so high variability in rocks
 #high variability =high species living in those region
-
 #we chose nir for calculation
 #how to choose the layer to apply standard deviation
 #is by selecting multivariate analysis and apply it to the image
