@@ -75,7 +75,7 @@ sent <-im.import("sentinel.png")
 pairs(sent)
 viridisc <- colorRampPalette(viridis(7))(255)
 
-#sentinel 2 and sentinel 3 the bars are frequency, the green are correlatig well
+#sentinel 2 and sentinel 3 the bars are frequency, the green are correlating well
 #the nir is less correlating with other ands like sentinel 1 and sentinel 2
 #we should remove sentinel 4
 
@@ -115,7 +115,6 @@ plot(sdstack, col=viridisc)
 
 #in 3/3 its local, in 7/7 its better
 #the function focal can also be used to calculate other statistics
-#so 
+
 
 #we have ploted sd of nir, sd of pc1, sd of pc2
-#lets make our own names, the 
