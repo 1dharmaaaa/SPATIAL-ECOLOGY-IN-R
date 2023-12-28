@@ -9,12 +9,12 @@ library(vegan)
 data(dune)
 head(dune)
 
-# Comment: The 'dune' dataset is loaded from the 'vegan' package, and the first few rows are displayed.
+# The 'dune' dataset is loaded from the 'vegan' package, and the first few rows are displayed.
 
 # Perform detrended correspondence analysis (DCA) on the 'dune' dataset
 ord <- decorana(dune)
 
-# Comment: Detrended correspondence analysis (DCA) is performed on the 'dune' dataset using the 'decorana' function from the 'vegan' package.
+#  Detrended correspondence analysis (DCA) is performed on the 'dune' dataset using the 'decorana' function from the 'vegan' package.
 
 # Extract the first four axis length values from the DCA result
 ldc1 =  3.7004 
@@ -22,12 +22,12 @@ ldc2 =  3.1166
 ldc3 = 1.30055
 ldc4 = 1.47888
 
-# Comment: The first four axis length values are extracted from the DCA result.
+#  The first four axis length values are extracted from the DCA result.
 
 # Calculate the total axis length
 total = ldc1 + ldc2 + ldc3 + ldc4
 
-# Comment: The total axis length is calculated by summing the first four axis length values.
+# The total axis length is calculated by summing the first four axis length values.
 
 # Calculate the percentage of contribution of each axis to the total
 pldc1 = ldc1 * 100 / total
@@ -35,21 +35,21 @@ pldc2 = ldc2 * 100 / total
 pldc3 = ldc3 * 100 / total
 pldc4 = ldc4 * 100 / total
 
-# Comment: The percentage contribution of each axis to the total is calculated.
+#  The percentage contribution of each axis to the total is calculated.
 
 # Print the percentage contribution of the first two axes
 pldc1
 pldc2
 
-# Comment: The percentage contribution of the first two axes is printed.
+# The percentage contribution of the first two axes is printed.
 
 # Print the sum of the percentage contributions of the first two axes
 pldc1 + pldc2
 
-# Comment: The sum of the percentage contributions of the first two axes is printed.
+# The sum of the percentage contributions of the first two axes is printed.
 #The results suggest that the first axis (ldc1) contributes approximately 38.56% to the total variation, and the second axis (ldc2) contributes approximately 32.48%. Together, these two axes contribute around 71.04% of the total variation in the data.
 
 # Plot the DCA result
 plot(ord)
 
-# Comment: The DCA result is plotted using the 'plot' function.
+#  The DCA result is plotted using the 'plot' function.
