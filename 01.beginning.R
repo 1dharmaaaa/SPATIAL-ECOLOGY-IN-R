@@ -13,7 +13,7 @@ final
 
 final^2
 
-# array
+# To set up  array
 sophi <- c(10, 20, 30, 50, 70) # microplastics 
 
 # Create vectors for plotting
