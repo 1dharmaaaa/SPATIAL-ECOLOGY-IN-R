@@ -1,0 +1,12 @@
+# Install and load necessary package
+install.packages("imageRy")
+library(imageRy)
+
+# List available images
+im.list()
+
+# Import an image named "matogrosso_ast_2006209_lrg.jpg"
+mato2006 <- im.import("matogrosso_ast_2006209_lrg.jpg")
+
+# Plot the RGB channels of the imported image
+im.plotRGB(mato2006, 2, 1, 3)
