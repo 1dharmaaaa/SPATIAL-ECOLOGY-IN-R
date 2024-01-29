@@ -23,6 +23,7 @@ dif <- EN01[[1]] - EN13[[1]]
 
 dev.off()
 plot(dif)
+
 # The difference is challenging to see, so we'll use a color ramp palette.
 
 # Set color ramp palette for better visualization.
@@ -59,7 +60,7 @@ plot(g2015, col=clg)
 stackg <- c(g2000, g2005, g2010, g2015)
 plot(stackg, col=clg)
 
-# 2003 was the worst for temperature, showing a high decrease in temperature.
+# 2005 was the worst for temperature, showing a high decrease in temperature.
 
 # Calculate the difference between the first and final elements of the stack.
 difg <- stackg[[1]] - stackg[[4]]
