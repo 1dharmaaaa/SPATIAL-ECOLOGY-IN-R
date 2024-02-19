@@ -1,0 +1,165 @@
+# Installed and loaded necessary packages
+install.packages(c("raster", "viridis", "ggplot2", "gridExtra"))
+install.packages("RStoolbox")
+install.packages("rasterVis")
+# Loaded required libraries for data manipulation, visualization, and analysis
+library(raster)
+library(viridis)
+library(ggplot2)
+library(gridExtra)
+library(RStoolbox)
+library(rasterVis)
+
+# Set the working directory to the specified path
+setwd("/Users/vaishnavipittala/Desktop/r")
+
+# Downloaded the image from the provided NASA Earthdata link, focusing on MODIS data from March 2003 and March 2023
+# Link: https://search.earthdata.nasa.gov/search/granules?p=C2565807727-LPCLOUD&pg[0][v]=f&pg[0][qt]=2003-01-01T00%3A00%3A00.000Z%2C2020-01-01T23%3A59%3A59.999Z&pg[0][gsk]=start_date&tl=1708125651!3!!&lat=-0.28125&zoom=0
+# Assessing Earth in March 2003 and Earth in March 2023 using the downloaded MODIS raster data.
+
+# Loaded MODIS surface reflectance data for the year 2023
+# Loaded raster stacks for both 2003 and 2023
+earth_2003 <- stack("MOD09CMG.A2003001.006.2015047152820.hdf")
+earth_2023 <- stack("MCD19A1CMGL.A2023121.061.2023123202930.hdf")
+
+# Extracted individual bands for Red, Green, and Blue for both years
+red_band_2003 <- earth_2003[['BRF_B01']]
+green_band_2003 <- earth_2003[['BRF_B04']]
+blue_band_2003 <- earth_2003[['BRF_B03']]
+
+red_band_2023 <- earth_2023[['BRF_B01']]
+green_band_2023 <- earth_2023[['BRF_B04']]
+blue_band_2023 <- earth_2023[['BRF_B03']]
+
+# Created RGB stacks for both years
+rgb_stack_2003 <- stack(red_band_2003, green_band_2003, blue_band_2003)
+rgb_stack_2023 <- stack(red_band_2023, green_band_2023, blue_band_2023)
+
+# Plotted RGB images for both 2003 and 2023
+plotRGB(rgb_stack_2003, r = 1, g = 2, b = 3, stretch = "lin", main = "RGB Plot - Year 2003")
+plotRGB(rgb_stack_2023, r = 1, g = 2, b = 3, stretch = "lin", main = "RGB Plot - Year 2023")
+
+# Set up side-by-side plotting for RGB images
+par(mfrow=c(1,2))
+plotRGB(rgb_stack_2003, r = 1, g = 2, b = 3, stretch = "lin", main = "RGB Plot - Year 2003")
+plotRGB(rgb_stack_2023, r = 1, g = 2, b = 3, stretch = "lin", main = "RGB Plot - Year 2023")
+
+# Extracted Near-Infrared (NIR) and Red bands for both years
+nir_band_2003 <- earth_2003[['BRF_B02']]
+red_band_2003 <- earth_2003[['BRF_B01']]
+
+nir_band_2023 <- earth_2023[['BRF_B02']]
+red_band_2023 <- earth_2023[['BRF_B01']]
+
+# Calculated NDVI (Normalized Difference Vegetation Index) for both 2003 and 2023
+ndvi_2003 <- (nir_band_2003 - red_band_2003) / (nir_band_2003 + red_band_2003)
+ndvi_2023 <- (nir_band_2023 - red_band_2023) / (nir_band_2023 + red_band_2023)
+
+# Calculated the difference in NDVI between 2023 and 2003
+ndvi_diff <- ndvi_2023 - ndvi_2003
+
+# Set up side-by-side plotting for NDVI
+par(mfrow=c(1,3))
+levelplot(ndvi_2003, col.regions = viridis(50), at = seq(-1, 1, length.out = 50),
+          main = "NDVI in 2003", scales = list(draw = TRUE))
+levelplot(ndvi_2023, col.regions = viridis(50), at = seq(-1, 1, length.out = 50),
+          main = "NDVI in 2023", scales = list(draw = TRUE))
+levelplot(ndvi_diff, col.regions = viridis(50), at = seq(-1, 1, length.out = 50),
+          main = "Difference in NDVI (2003 - 2023)", scales = list(draw = TRUE))
+
+# Exploring changes in Patagonia's glacial landscapes using Landsat imagery from 1985 and 2017
+# Link to the imagery: https://climate.nasa.gov/images-of-change/?id=631#631-south-patagonian-glacier-beats-a-hasty-retreat
+
+# Defined file paths for Patagonia raster images
+patagonia_1985 <- raster("pat_1985.tiff")
+patagonia_2017 <- raster("pat_2017.tiff")
+
+# Manually set extent for both Patagonia rasters
+extent(patagonia_1985) <- c(0, 2048, 0, 1536)
+extent(patagonia_2017) <- c(0, 2048, 0, 1536)
+
+# Converted Patagonia rasters to data frames
+patagonia_1985_df <- as.data.frame(patagonia_1985, xy = TRUE)
+patagonia_2017_df <- as.data.frame(patagonia_2017, xy = TRUE)
+
+# Created ggplot2 plots for snow cover in Patagonia for both 1985 and 2017
+p1 <- ggplot() + geom_raster(data = patagonia_1985_df, aes(x = x, y = y, fill = pat_1985_1)) +
+  scale_fill_viridis(option = "magma", direction = 1, alpha = 0.8) +
+  ggtitle("Snow Cover in Patagonia (1985)") +
+  theme_minimal() +
+  theme(axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank())
+
+p2 <- ggplot() + geom_raster(data = patagonia_2017_df, aes(x = x, y = y, fill = pat_2017_1)) +
+  scale_fill_viridis(option = "magma", direction = 1, alpha = 0.8) +
+  ggtitle("Snow Cover in Patagonia (2017)") +
+  theme_minimal() +
+  theme(axis.title = element_blank(),
+        axis.text = element_blank(),
+        axis.ticks = element_blank(),
+        axis.line = element_blank())
+
+# Arranged snow cover plots for Patagonia side by side
+grid.arrange(p1, p2, ncol = 2)
+
+# Imported Patagonia raster files using lapply
+rlist_patagonia <- list.files(pattern = "pat_", full.names = TRUE)
+import_patagonia <- lapply(rlist_patagonia, raster)
+
+# Created a stack for Patagonia
+GPn <- stack(import_patagonia)
+
+# Plotted the Patagonia raster stack
+plot(GPn, main = "Patagonia Stack")
+str(GPn)
+
+# Converted Patagonia raster layer to data frame for 1985
+patagonia_1985_df <- rasterToPoints(patagonia_1985)
+patagonia_1985_df <- as.data.frame(patagonia_1985_df)
+
+# Created ggplot2 plot for Patagonia 1985
+p1 <- ggplot(patagonia_1985_df, aes(x = x, y = y, fill = pat_1985_1)) +
+  geom_raster() +
+  scale_fill_viridis(option = "magma", direction = -1, alpha = 0.8) +
+  ggtitle("Patagonia 1985") +
+  theme_minimal()
+
+# Converted Patagonia raster layer to data frame for 2017
+patagonia_2017_df <- rasterToPoints(patagonia_2017)
+patagonia_2017_df <- as.data.frame(patagonia_2017_df)
+
+# Created ggplot2 plot for Patagonia 2017
+p2 <- ggplot(patagonia_2017_df, aes(x = x, y = y, fill = pat_2017_1)) +
+  geom_raster() +
+  scale_fill_viridis(option = "magma", direction = -1, alpha = 0.8) +
+  ggtitle("Patagonia 2017") +
+  theme_minimal()
+
+# Calculated ice cover difference for Patagonia
+ice_diff <- GPn[[2]] - GPn[[1]]
+
+# Converted ice cover difference raster to data frame
+ice_diff_df <- rasterToPoints(ice_diff)
+ice_diff_df <- as.data.frame(ice_diff_df)
+
+# Created ggplot2 plot for ice cover difference in Patagonia
+p3 <- ggplot(ice_diff_df, aes(x = x, y = y, fill = layer)) +
+  geom_raster() +
+  scale_fill_viridis(option = "inferno", direction = -1, alpha = 0.8) +
+  ggtitle("Ice Cover Difference (Patagonia)") +
+  theme_minimal()
+
+# Showed the plot for ice cover difference in Patagonia
+plot(p3)
+
+# Arranged plots for Patagonia in a grid layout
+grid.arrange(p1, p2, ncol = 2)
+
+# Added the plot for ice cover difference in Patagonia in a new row
+grid.arrange(p3, ncol = 1, top = textGrob("Ice Cover Difference (Patagonia)", gp = gpar(fontsize = 16)))
+
+
+
+
