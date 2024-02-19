@@ -67,7 +67,18 @@ levelplot(ndvi_2023, col.regions = viridis(50), at = seq(-1, 1, length.out = 50)
 levelplot(ndvi_diff, col.regions = viridis(50), at = seq(-1, 1, length.out = 50),
           main = "Difference in NDVI (2003 - 2023)", scales = list(draw = TRUE))
 
-# Exploring changes in Patagonia's glacial landscapes using Landsat imagery from 1985 and 2017
+# Plot the histogram
+hist(ndvi_2003_values, breaks = 50, col = "skyblue", main = "Histogram of NDVI (2003 vs 2023)",
+     xlab = "NDVI", ylab = "Frequency", xlim = c(-1, 1))
+
+# Plot the histogram for 2023 on the same plot
+hist(ndvi_2023_values, breaks = 50, col = "lightgreen", add = TRUE)
+
+# Add a legend
+legend("topright", legend = c("2003", "2023"), fill = c("skyblue", "lightgreen"))
+
+
+# Exploring changes in Patagonia's glacial landscapes using Landsat imagery from 1985 and 2017(NASA)
 # Link to the imagery: https://climate.nasa.gov/images-of-change/?id=631#631-south-patagonian-glacier-beats-a-hasty-retreat
 
 # Defined file paths for Patagonia raster images
@@ -86,20 +97,12 @@ patagonia_2017_df <- as.data.frame(patagonia_2017, xy = TRUE)
 p1 <- ggplot() + geom_raster(data = patagonia_1985_df, aes(x = x, y = y, fill = pat_1985_1)) +
   scale_fill_viridis(option = "magma", direction = 1, alpha = 0.8) +
   ggtitle("Snow Cover in Patagonia (1985)") +
-  theme_minimal() +
-  theme(axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.line = element_blank())
+  theme_minimal() 
 
 p2 <- ggplot() + geom_raster(data = patagonia_2017_df, aes(x = x, y = y, fill = pat_2017_1)) +
   scale_fill_viridis(option = "magma", direction = 1, alpha = 0.8) +
   ggtitle("Snow Cover in Patagonia (2017)") +
-  theme_minimal() +
-  theme(axis.title = element_blank(),
-        axis.text = element_blank(),
-        axis.ticks = element_blank(),
-        axis.line = element_blank())
+  theme_minimal() 
 
 # Arranged snow cover plots for Patagonia side by side
 grid.arrange(p1, p2, ncol = 2)
