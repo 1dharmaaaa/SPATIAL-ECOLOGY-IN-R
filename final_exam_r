@@ -1,13 +1,11 @@
 # Installed and loaded necessary packages to understand the downloaded images
 install.packages(c("raster", "viridis", "ggplot2", "gridExtra"))
-install.packages("RStoolbox")
 install.packages("rasterVis")
 # Loaded required libraries for data manipulation, visualization, and analysis
 library(raster)
 library(viridis)
 library(ggplot2)
 library(gridExtra)
-library(RStoolbox)
 library(rasterVis)
 
 # Set the working directory to the specified path of where the files are located
